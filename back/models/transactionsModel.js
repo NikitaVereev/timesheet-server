@@ -13,6 +13,10 @@ const transactionsSchema = mongoose.Schema(
 			type: Date,
 			default: new Date().toISOString().slice(0, 10) + 'T03:00:00.000Z',
 		},
+		itsMyMonth: {
+			type: Number,
+			required: true,
+		},
 	},
 	{
 		minimize: false,

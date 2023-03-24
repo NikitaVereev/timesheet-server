@@ -5,10 +5,11 @@ import { request } from 'http'
 //post /api/task/:id/transactions
 
 export const createNewTransactions = asyncHandler(async (req, res) => {
-	const { date } = req.body
+	const { date, itsMyMonth } = req.body
 	const transactions = await Transactions.create({
 		date,
 		taskId: req.params.id,
+		itsMyMonth,
 	})
 	res.json(transactions)
 })
