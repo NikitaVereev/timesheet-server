@@ -12,6 +12,12 @@ const postingAccountingSchema = mongoose.Schema(
 			ref: 'Transactions',
 			required: true,
 		},
+		taskId: {
+			type: ObjectId,
+			ref: 'Tasks',
+			required: false,
+		},
+		completedTime: { type: Number, default: 0 },
 	},
 	{
 		minimize: false,

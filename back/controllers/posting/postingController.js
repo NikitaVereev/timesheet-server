@@ -5,12 +5,13 @@ import { request } from 'http'
 //post /api/task/:id/transactions/:id/posting
 
 export const createNewPosting = asyncHandler(async (req, res) => {
-	const { hours, description } = req.body
+	const { hours, description, taskId } = req.body
 
 	const posting = await PostingAccounting.create({
 		hours,
 		description,
 		transactionId: req.params.id,
+		taskId,
 	})
 	res.json(posting)
 })
@@ -42,7 +43,7 @@ export const deletePosting = asyncHandler(async (req, res) => {
 //put /api/task/:id/transactions/:id/posting
 
 export const changePosting = asyncHandler(async (req, res) => {
-	const { isActive, postingId } = req.body
+	const { isActive, postingId, completedTime } = req.body
 
 	const posting = await PostingAccounting.findById(postingId)
 
@@ -52,6 +53,7 @@ export const changePosting = asyncHandler(async (req, res) => {
 	}
 
 	posting.isActive = isActive
+	posting.completedTime = completedTime
 
 	const updatedPosting = await posting.save()
 

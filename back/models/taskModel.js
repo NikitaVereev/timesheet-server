@@ -9,20 +9,11 @@ const taskSchema = mongoose.Schema(
 		isActive: { type: Boolean, default: false },
 		time: { type: Number, default: 0 },
 		completedTask: { type: Date },
-		project: [
-			{
-				type: ObjectId,
-				ref: 'Project',
-				required: true,
-			},
-		],
-		postingAccounting: [
-			{
-				type: ObjectId,
-				ref: 'PostingAccounting',
-				required: true,
-			},
-		],
+		projectId: {
+			type: ObjectId,
+			ref: 'Project',
+			required: false,
+		},
 	},
 	{
 		minimize: true,

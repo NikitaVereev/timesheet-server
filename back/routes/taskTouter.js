@@ -6,6 +6,7 @@ import {
 	updateTask,
 	getTask,
 	updateCompleteTask,
+	updateTaskWithProject,
 } from '../controllers/tasks/taskController.js'
 
 import {
@@ -33,6 +34,8 @@ router
 	.delete(deleteTask)
 
 router.route('/:id').get(getTask).put(updateCompleteTask)
+
+router.route('/:id/connection').put(updateTaskWithProject)
 
 router
 	.route('/:id/transactions')

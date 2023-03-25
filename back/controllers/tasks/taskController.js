@@ -4,14 +4,13 @@ import asyncHandler from 'express-async-handler'
 // post /api/post
 
 export const createNewTasks = asyncHandler(async (req, res) => {
-	const { title, body, isActive, time, projectIdx } = req.body
+	const { title, body, isActive, time } = req.body
 
 	const tasks = await Tasks.create({
 		title,
 		body,
 		isActive,
 		time,
-		project: projectIdx,
 	})
 	res.json(tasks)
 })
@@ -44,6 +43,22 @@ export const updateCompleteTask = asyncHandler(async (req, res) => {
 		throw new Error('Не найдено')
 	}
 	task.isActive = isActive
+	const updatedTask = await task.save()
+
+	res.json(updatedTask)
+})
+
+export const updateTaskWithProject = asyncHandler(async (req, res) => {
+	const { projectId, taskId } = req.body
+
+	const task = await Tasks.findById(taskId)
+
+	if (!task) {
+		res.status(404)
+		throw new Error('Не получилось')
+	}
+
+	task.projectId = projectId
 	const updatedTask = await task.save()
 
 	res.json(updatedTask)
