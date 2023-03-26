@@ -7,6 +7,7 @@ const projectSchema = mongoose.Schema(
 		title: { type: String, required: true },
 		body: { type: String, required: true },
 		isActive: { type: Boolean, default: false },
+		completedTime: { type: Number, default: 0 },
 		tasks: [
 			{
 				type: ObjectId,

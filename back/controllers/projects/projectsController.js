@@ -51,6 +51,25 @@ export const updateProjectTasks = asyncHandler(async (req, res) => {
 	res.json(updatedProject)
 })
 
+//put /api/projects/:id/completed
+
+export const updateCompletedProjectTime = asyncHandler(async (req, res) => {
+	const { completedTime } = req.body
+
+	const project = await Project.findById(req.params.id)
+
+	if (!project) {
+		res.status(404)
+		throw new Error('Проект не найден')
+	}
+
+	project.completedTime = completedTime
+
+	const updatedProject = await project.save()
+
+	res.json(updatedProject)
+})
+
 // put /api/projects
 
 export const updateProject = asyncHandler(async (req, res) => {

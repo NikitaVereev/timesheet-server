@@ -8,7 +8,7 @@ const taskSchema = mongoose.Schema(
 		body: { type: String, required: true },
 		isActive: { type: Boolean, default: false },
 		time: { type: Number, default: 0 },
-		completedTask: { type: Date },
+		completedTime: { type: Number, default: 0 },
 		projectId: {
 			type: ObjectId,
 			ref: 'Project',

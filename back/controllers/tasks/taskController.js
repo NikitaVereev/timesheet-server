@@ -34,7 +34,7 @@ export const getTask = asyncHandler(async (req, res) => {
 // put /api/task/:id/complete
 
 export const updateCompleteTask = asyncHandler(async (req, res) => {
-	const { taskId, isActive } = req.body
+	const { taskId, isActive, completedTime } = req.body
 
 	const task = await Tasks.findById(taskId)
 
@@ -43,6 +43,7 @@ export const updateCompleteTask = asyncHandler(async (req, res) => {
 		throw new Error('Не найдено')
 	}
 	task.isActive = isActive
+	task.completedTime = completedTime
 	const updatedTask = await task.save()
 
 	res.json(updatedTask)
@@ -67,7 +68,7 @@ export const updateTaskWithProject = asyncHandler(async (req, res) => {
 // put /api/task
 
 export const updateTask = asyncHandler(async (req, res) => {
-	const { title, body, taskId, isActive } = req.body
+	const { title, body, taskId, isActive, completedTime } = req.body
 
 	const task = await Tasks.findById(taskId)
 
@@ -79,6 +80,7 @@ export const updateTask = asyncHandler(async (req, res) => {
 	task.title = title
 	task.body = body
 	task.isActive = isActive
+	task.completedTime = completedTime
 
 	const updatedTask = await task.save()
 
